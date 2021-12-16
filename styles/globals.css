@@ -1,16 +1,19 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+:root {
+  --primary-color: #155b94;
+  --background-color: #ffffff;
+  --border-radius: 3px;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+html {
+  box-sizing: border-box;
+  height: 100%;
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Helvetica Neue", sans-serif;
+  background-color: #e7f5fd;
 }
