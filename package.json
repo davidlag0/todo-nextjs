@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch"
+    "test": "jest --watch --coverage --coverageDirectory='coverage'"
   },
   "dependencies": {
     "@prisma/client": "^3.6.0",
