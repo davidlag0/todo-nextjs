@@ -1,0 +1,41 @@
+.ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.li {
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.liRight {
+  composes: li;
+  float: right;
+}
+
+.appTitle {
+  composes: li;
+  color: var(--background-color);
+  background-color: var(--primary-color);
+  margin: 0.3em 0.3em 0.3em 0.3em;
+  padding: 0.1em 0.5em 0.1em 0.5em;
+  width: auto;
+  display: inline-block;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.loginMessage {
+  color: #ffffff;
+}
+
+.button {
+  margin: 0 1em 0 1em;
+}

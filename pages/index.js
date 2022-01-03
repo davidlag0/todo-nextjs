@@ -1,8 +1,12 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import Header from "../components/header";
 import TaskList from "../components/tasklist";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
+  const { status } = useSession();
+
   return (
     <div>
       <Head>
@@ -17,9 +21,10 @@ export default function Home() {
         <title>Next.js TODO App</title>
       </Head>
 
+      <Header />
+
       <main>
         <div className={styles.container}>
-          <h1 className={styles.title}>Tasks List</h1>
           <TaskList></TaskList>
         </div>
       </main>

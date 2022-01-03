@@ -2,14 +2,5 @@
   width: 100%;
   max-width: 500px;
   min-width: 300px;
-  margin: 0 auto;
-}
-
-.title {
-  color: var(--background-color);
-  background-color: var(--primary-color);
-  padding: 0.1em 0.5em 0.1em 0.5em;
-  width: auto;
-  display: inline-block;
-  border-radius: var(--border-radius);
+  margin: 2em auto;
 }
