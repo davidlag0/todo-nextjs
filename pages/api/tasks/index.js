@@ -1,11 +1,33 @@
 import prisma from "../../../lib/prisma";
+import { getSession } from "next-auth/react";
 
 export default async function handle(req, res) {
-  const tasks = await prisma.task.findMany();
+  const session = await getSession({ req });
 
-  if (tasks.length !== 0) {
-    res.json(tasks);
+  if (session) {
+    if (req.method === "GET") {
+      const tasks = await prisma.task.findMany();
+
+      if (tasks.length !== 0) {
+        res.json(tasks);
+      } else {
+        res.status(404).send({ error: "No Task Found" });
+      }
+    } else if (req.method === "POST") {
+      const { name } = req.body;
+
+      const result = await prisma.task.create({
+        data: {
+          name: name,
+          author: { connect: { email: session?.user?.email } },
+        },
+      });
+
+      res.json(result);
+    } else {
+      res.status(405).send({ error: "Method Not Allowed" });
+    }
   } else {
-    res.status(404).send({ error: "No Task Found" });
+    res.status(401).send({ error: "Valid Credentials Required" });
   }
 }
