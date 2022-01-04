@@ -1,9 +1,32 @@
 import TaskItem from "./taskitem";
 import React from "react";
+import { useSession } from "next-auth/react";
 import styles from "../styles/TaskList.module.css";
 
 export default function TaskList() {
   const [tasks, updateTasks] = React.useState([]);
+  const { status } = useSession();
+
+  React.useEffect(() => {
+    if (status === "authenticated") {
+      fetch("api/tasks")
+        .then((res) => res.json())
+        .then((data) => {
+          updateTasks(
+            data.map((task) => {
+              return {
+                text: task.name,
+                checked: task.checked,
+                id: task.id,
+              };
+            })
+          );
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }, [status]);
 
   const addTask = (text) => {
     const newTask = {
@@ -17,24 +40,43 @@ export default function TaskList() {
     });
   };
 
-  const handleDeleteTask = (event) => {
+  const handleDeleteTask = async (event) => {
+    const IDToDelete = event.target.dataset.deleteid;
+
     updateTasks((prevTasks) => {
-      return prevTasks.filter(
-        (task) => task.id !== Number(event.target.dataset.deleteid)
-      );
+      return prevTasks.filter((task) => task.id !== Number(IDToDelete));
     });
+
+    if (status === "authenticated") {
+      await fetch("/api/tasks/" + IDToDelete, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+    }
   };
 
-  const handleAddTask = (event) => {
+  const handleAddTask = async (event) => {
     // To avoid the default form behavior of sending the content to the web server.
     event.preventDefault();
 
+    try {
       const input = document.querySelector("form > input");
 
-    const text = input.value.trim();
-    if (text !== "") {
-      addTask(text);
-      input.value = "";
+      const text = input.value.trim();
+      if (text !== "") {
+        addTask(text);
+        input.value = "";
+
+        if (status === "authenticated") {
+          await fetch("/api/tasks", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: text }),
+          });
+        }
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
