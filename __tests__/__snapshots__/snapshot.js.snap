@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders homepage unchanged 1`] = `
+<div>
+  <div>
+    <nav>
+      <ul
+        class="ul"
+      >
+        <li
+          class="appTitle"
+        >
+          Tasks List
+        </li>
+        <li
+          class="liRight"
+        >
+          <button>
+            Sign in with GitHub
+          </button>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <div
+        class="container"
+      >
+        <div
+          class="global"
+        >
+          <form>
+            <input
+              aria-label="Enter a new task"
+              class="taskFormInput"
+              placeholder="Add a task..."
+              type="text"
+            />
+          </form>
+          <ul
+            class="ul"
+          >
+            <li>
+              <div
+                class="emptyState"
+              >
+                <svg
+                  aria-labelledby="tasklistIconTitle"
+                  class="emptyStateSVG"
+                  height="24"
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title
+                    id="tasklistIconTitle"
+                  >
+                    Task List
+                  </title>
+                  <rect
+                    height="20"
+                    width="20"
+                    x="2"
+                    y="2"
+                  />
+                  <path
+                    d="M11 7L17 7M11 12L17 12M11 17L17 17"
+                  />
+                  <line
+                    x1="7"
+                    x2="7"
+                    y1="7"
+                    y2="7"
+                  />
+                  <line
+                    x1="7"
+                    x2="7"
+                    y1="12"
+                    y2="12"
+                  />
+                  <line
+                    x1="7"
+                    x2="7"
+                    y1="17"
+                    y2="17"
+                  />
+                </svg>
+                <h2>
+                  Add your first task
+                </h2>
+                <p>
+                  What will you work on today?
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+`;
