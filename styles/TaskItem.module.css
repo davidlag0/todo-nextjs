@@ -1,0 +1,73 @@
+.global {
+  box-sizing: inherit;
+}
+
+.inputCheckbox {
+  display: none;
+}
+
+.svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--primary-color);
+  stroke-width: 2;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  fill: none;
+  color: var(--primary-color);
+}
+
+.listTaskItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: var(--border-radius);
+  padding: 8px 10px 8px 10px;
+  background-color: var(--background-color);
+  color: #000000;
+  font-size: 16px;
+  font-weight: normal;
+  margin: 3px 0 3px 0;
+}
+
+.listTaskLabel {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.listTaskCheckmark {
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+.listTaskCheckmarkChecked {
+  composes: listTaskCheckmark;
+  stroke-dashoffset: 0;
+}
+
+.listTaskText {
+  width: 100%;
+  padding-left: 7px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.listTaskTextCrossed {
+  composes: listTaskText;
+  text-decoration: line-through;
+}
+
+.listTaskButton {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.listTaskButtonSVG {
+  composes: listTaskButton svg;
+  pointer-events: none;
+}
