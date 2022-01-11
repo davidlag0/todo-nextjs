@@ -1,0 +1,4 @@
+**/.next/**
+.github/**
+coverage
+next.config.js

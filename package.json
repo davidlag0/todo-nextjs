@@ -6,6 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "prettier-check": "prettier --check .",
     "test": "jest --coverage",
     "test:watch": "jest --watch"
   },
