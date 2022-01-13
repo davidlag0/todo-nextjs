@@ -26,7 +26,7 @@ describe("Home", () => {
       name: "",
     });
 
-    expect(navigation).toBeDefined();
-    expect(main).toBeDefined();
+    expect(navigation).toBeInTheDocument();
+    expect(main).toBeInTheDocument();
   });
 });
