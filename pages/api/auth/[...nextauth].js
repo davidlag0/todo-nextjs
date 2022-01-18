@@ -24,5 +24,16 @@ export default NextAuth({
 
       return false;
     },
+    async jwt({ token, account }) {
+      if (account) {
+        const author = await prisma.user.findUnique({
+          where: { email: token.email },
+        });
+
+        token.authorID = author.id;
+      }
+
+      return token;
+    },
   },
 });
