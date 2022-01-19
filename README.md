@@ -1,5 +1,7 @@
 # todo-nextjs
 
+[![codecov](https://codecov.io/gh/davidlag0/todo-nextjs/branch/main/graph/badge.svg?token=YBGR2fclvo)](https://codecov.io/gh/davidlag0/todo-nextjs)
+
 Simple TODO app using the Next.js React framework.
 
 This application is meant to be some kind of boilerplate for me to learn about the various tools used in web development.
