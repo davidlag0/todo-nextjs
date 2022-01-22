@@ -1,6 +1,8 @@
 # todo-nextjs
 
 [![codecov](https://codecov.io/gh/davidlag0/todo-nextjs/branch/main/graph/badge.svg?token=YBGR2fclvo)](https://codecov.io/gh/davidlag0/todo-nextjs)
+![Node.js CI](https://github.com/davidlag0/todo-nextjs/actions/workflows/node.js.yml/badge.svg)
+![CodeQL CI](https://github.com/davidlag0/todo-nextjs/actions/workflows/codeql-analysis.yml/badge.svg)
 
 Simple TODO app using the Next.js React framework.
 
