@@ -9,7 +9,11 @@
     "prepare": "husky install",
     "prettier-check": "prettier --check .",
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "cypress": "cypress open",
+    "cypress:headless": "cypress run",
+    "e2e": "start-server-and-test start http://localhost:3000 cypress",
+    "e2e:headless": "start-server-and-test start http://localhost:3000 cypress:headless"
   },
   "dependencies": {
     "@prisma/client": "^3.8.0",
@@ -23,6 +27,7 @@
     "@commitlint/config-conventional": "^16.0.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
+    "cypress": "^9.3.1",
     "eslint": "^8.6.0",
     "eslint-config-next": "^12.0.8",
     "eslint-config-prettier": "^8.3.0",
@@ -32,7 +37,8 @@
     "jest-mock-extended": "^2.0.4",
     "node-mocks-http": "^1.11.0",
     "prettier": "2.5.1",
-    "prisma": "^3.8.0"
+    "prisma": "^3.8.0",
+    "start-server-and-test": "^1.14.0"
   },
   "commitlint": {
     "extends": [
