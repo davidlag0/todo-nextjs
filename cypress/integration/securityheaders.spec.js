@@ -6,6 +6,7 @@ describe("Navigation", () => {
     cy.get("@mainPage").should((response) => {
       expect(response.headers, "response headers").to.include({
         "x-frame-options": "SAMEORIGIN",
+        "x-content-type-options": "nosniff",
       });
     });
   });
