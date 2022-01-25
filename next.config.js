@@ -6,6 +6,10 @@ const securityHeaders = [
   {
     key: 'X-Content-Type-Options',
     value: 'nosniff'
+  },
+  {
+    key: 'Referrer-Policy',
+    value: 'no-referrer-when-downgrade'
   }
 ]
 
