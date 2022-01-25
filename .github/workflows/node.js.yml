@@ -28,6 +28,8 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
+      env:
+        CORS_ALLOWED_ORIGIN: ${{secrets.CORS_ALLOWED_ORIGIN}}
     - run: npm test
     - uses: actions/upload-artifact@v2
       with:
