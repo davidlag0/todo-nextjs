@@ -21,6 +21,10 @@ const securityHeaders = [
       "default-src 'none'; connect-src 'self' https://vitals.vercel-insights.com/v1/vitals; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'",
   },
   { key: "Access-Control-Allow-Origin", value: process.env.CORS_ALLOWED_ORIGIN },
+  {
+    key: 'X-XSS-Protection',
+    value: '1; mode=block'
+  }
 ]
 
 module.exports = {
