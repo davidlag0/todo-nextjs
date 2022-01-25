@@ -59,3 +59,4 @@ npm run lint
   - `GITHUB_ID`
   - `GITHUB_SECRET`
   - `NEXTAUTH_SECRET` that can be generated using `$ openssl rand -base64 32`
+  - `CORS_ALLOWED_ORIGIN` to set the HTTP header `Access-Control-Allow-Origin` to something else than `*`
