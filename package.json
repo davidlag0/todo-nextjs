@@ -8,12 +8,13 @@
     "lint": "next lint",
     "prepare": "husky install",
     "prettier-check": "prettier --check .",
-    "test": "jest --coverage",
+    "test": "jest --coverage --testPathPattern='unit'",
     "test:watch": "jest --watch",
+    "test:e2e": "jest --testPathPattern='integration'",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
     "e2e": "start-server-and-test start http://localhost:3000 cypress",
-    "e2e:headless": "start-server-and-test start http://localhost:3000 cypress:headless"
+    "e2e:headless": "start-server-and-test start http://localhost:3000 'npm run cypress:headless && npm run test:e2e'"
   },
   "dependencies": {
     "@prisma/client": "^3.8.0",

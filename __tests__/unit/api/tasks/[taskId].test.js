@@ -1,8 +1,8 @@
 import { createMocks } from "node-mocks-http";
-import handle from "../../../pages/api/tasks/index";
+import handle from "../../../../pages/api/tasks/[taskId]";
 import { getSession } from "next-auth/react";
 import { getToken } from "next-auth/jwt";
-import { prismaMock } from "../../../lib/prismaMockSingleton";
+import { prismaMock } from "../../../../lib/prismaMockSingleton";
 
 jest.mock("next-auth/react");
 jest.mock("next-auth/jwt");
@@ -20,20 +20,21 @@ const testToken = {
   authorID: 1,
 };
 
+const testTaskId = 1;
 const testTask = {
+  id: testTaskId,
   name: "Test Task",
   checked: false,
 };
+const testTaskUrlId = 1;
 
-const testTask2 = {
-  name: "Test Task 2",
-  checked: false,
-};
-
-describe("/api/tasks/", () => {
+describe("/api/tasks/[taskId]", () => {
   test("returns error message when logged out", async () => {
     const { req, res } = createMocks({
       method: "GET",
+      query: {
+        id: testTaskUrlId,
+      },
     });
 
     getSession.mockReturnValue(null);
@@ -51,6 +52,9 @@ describe("/api/tasks/", () => {
   test("returns error message when logged in and using an unsupported HTTP method", async () => {
     const { req, res } = createMocks({
       method: "UNSUPPORTED",
+      query: {
+        id: testTaskUrlId,
+      },
     });
 
     getSession.mockReturnValue({});
@@ -65,16 +69,41 @@ describe("/api/tasks/", () => {
     );
   });
 
-  test("returns task details when logged in and POST'ing a new task name", async () => {
+  test("returns error message when logged in and GET'ing task when there is no task returned", async () => {
     const { req, res } = createMocks({
-      method: "POST",
-      body: { name: "Test Task" },
+      method: "GET",
+      query: {
+        id: testTaskUrlId,
+      },
     });
 
     getSession.mockReturnValue(testSession);
     getToken.mockReturnValue(testToken);
 
-    prismaMock.task.create.mockResolvedValue(testTask);
+    prismaMock.task.findUnique.mockResolvedValue(null);
+
+    await handle(req, res);
+
+    expect(res._getStatusCode()).toBe(404);
+    expect(res._getData()).toEqual(
+      expect.objectContaining({
+        error: "Task Not Found",
+      })
+    );
+  });
+
+  test("returns task details when logged in and GET'ing a task", async () => {
+    const { req, res } = createMocks({
+      method: "GET",
+      query: {
+        id: testTaskUrlId,
+      },
+    });
+
+    getSession.mockReturnValue(testSession);
+    getToken.mockReturnValue(testToken);
+
+    prismaMock.task.findUnique.mockResolvedValue(testTask);
 
     await handle(req, res);
 
@@ -82,64 +111,28 @@ describe("/api/tasks/", () => {
     expect(JSON.parse(res._getData())).toEqual(
       expect.objectContaining(testTask)
     );
+    expect(req.query.id).toBe(testTask.id);
   });
 
-  test("returns error message when logged in and GET'ing tasks when there is no task in the list", async () => {
+  test("returns task details when logged in and DELETE'ing a task", async () => {
     const { req, res } = createMocks({
-      method: "GET",
+      method: "DELETE",
+      query: {
+        id: testTaskUrlId,
+      },
     });
 
     getSession.mockReturnValue(testSession);
     getToken.mockReturnValue(testToken);
 
-    prismaMock.task.findMany.mockResolvedValue([]);
-
-    await handle(req, res);
-
-    expect(res._getStatusCode()).toBe(404);
-    expect(res._getData()).toEqual(
-      expect.objectContaining({
-        error: "No Task Found",
-      })
-    );
-  });
-
-  test("returns task details when logged in and GET'ing tasks", async () => {
-    const { req, res } = createMocks({
-      method: "GET",
-    });
-
-    getSession.mockReturnValue(testSession);
-    getToken.mockReturnValue(testToken);
-
-    prismaMock.task.findMany.mockResolvedValue([testTask]);
+    prismaMock.task.delete.mockResolvedValue(testTask);
 
     await handle(req, res);
 
     expect(res._getStatusCode()).toBe(200);
-    expect(JSON.parse(res._getData())[0]).toEqual(
+    expect(JSON.parse(res._getData())).toEqual(
       expect.objectContaining(testTask)
     );
-  });
-
-  test("returns task details when logged in and GET'ing tasks when there is more than one task in the list", async () => {
-    const { req, res } = createMocks({
-      method: "GET",
-    });
-
-    getSession.mockReturnValue(testSession);
-    getToken.mockReturnValue(testToken);
-
-    prismaMock.task.findMany.mockResolvedValue([testTask, testTask2]);
-
-    await handle(req, res);
-
-    expect(res._getStatusCode()).toBe(200);
-    expect(JSON.parse(res._getData())[0]).toEqual(
-      expect.objectContaining(testTask)
-    );
-    expect(JSON.parse(res._getData())[1]).toEqual(
-      expect.objectContaining(testTask2)
-    );
+    expect(req.query.id).toBe(testTask.id);
   });
 });
