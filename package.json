@@ -17,12 +17,14 @@
   },
   "dependencies": {
     "@prisma/client": "^3.8.0",
+    "mobx": "^6.3.13",
     "net": "^1.0.2",
     "next": "^12.0.8",
     "next-auth": "^4.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "redoc": "^2.0.0-rc.63",
+    "styled-components": "^5.3.3",
     "tls": "^0.0.1",
     "yaml-loader": "^0.6.0"
   },
