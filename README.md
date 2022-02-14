@@ -42,13 +42,18 @@ npm start
 
 ## Development
 
-- Run the development server: `npm run dev`
-- Open [http://localhost:3000](http://localhost:3000) with a browser to see the result.
+### Start development server:
+
+```sh
+$ npm run dev
+```
+
+The application is accessible at [http://localhost:3000](http://localhost:3000).
 
 ### Linting
 
 ```sh
-npm run lint
+$ npm run lint
 ```
 
 ### Deployment
