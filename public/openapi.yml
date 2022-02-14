@@ -156,6 +156,9 @@ components:
             write:pets: modify pets in your account
             read:pets: read your pets
 servers:
-  - url: https://todo-nextjs.davidlaganiere.com/api/
+  - url: https://todo-nextjs.davidlaganiere.com/api
+    description: Production server (uses live data)
+  - url: http://localhost:3000/api
+    description: Local development
 security:
   - app_id: []
