@@ -56,6 +56,32 @@ The application is accessible at [http://localhost:3000](http://localhost:3000).
 $ npm run lint
 ```
 
+### Run integration (e2e) tests (macOS)
+
+Start podman VM:
+
+```sh
+$ podman machine start
+```
+
+Build container image using the `Containerfile` in folder `postgresql`:
+
+```sh
+$ podman build -t postgresdb:latest .
+```
+
+Run test PostgreSQL database container:
+
+```sh
+$ podman run -d --rm --name postgres -p 15432:5432/tcp postgresdb:latest
+```
+
+Initialize database with Prisma
+
+```sh
+$ npx prisma db push
+```
+
 ### Deployment
 
 - Environment variables to configure:

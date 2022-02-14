@@ -1,0 +1,6 @@
+FROM docker.io/library/postgres:14.2
+ENV POSTGRES_USER testuser
+ENV POSTGRES_DB testdb
+ENV POSTGRES_PASSWORD testpassword
+EXPOSE 5432
+COPY init-user-db.sh /docker-entrypoint-initdb.d/
