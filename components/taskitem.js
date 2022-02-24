@@ -21,6 +21,7 @@ export default function TaskItem({ text, checked, id, handleDelete }) {
           <svg className={styles.svg}>
             <rect width="18" height="18" x="3" y="3" />
             <path
+              title="Task Checkmark"
               className={
                 done
                   ? styles.listTaskCheckmarkChecked
@@ -33,6 +34,7 @@ export default function TaskItem({ text, checked, id, handleDelete }) {
           </svg>
         </label>
         <span
+          title="Task Item"
           className={done ? styles.listTaskTextCrossed : styles.listTaskText}
         >
           {text}
