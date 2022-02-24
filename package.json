@@ -9,7 +9,7 @@
     "prepare": "husky install",
     "prettier-check": "prettier --check .",
     "test": "jest --coverage --testPathPattern='unit'",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watch --testPathPattern='unit'",
     "test:e2e": "jest --testPathPattern='integration' --runInBand",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
