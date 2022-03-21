@@ -13,3 +13,4 @@ global.TextDecoder = TextDecoder;
 
 import fetchMock from "jest-fetch-mock";
 fetchMock.enableMocks();
+fetchMock.dontMock();

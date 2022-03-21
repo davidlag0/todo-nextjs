@@ -10,7 +10,7 @@ jest.mock("next-auth/react", () => ({
 
 describe("Home", () => {
   beforeEach(() => {
-    fetch.resetMocks();
+    fetch.doMock();
   });
 
   test("renders a nav and a main section with an empty task list", () => {

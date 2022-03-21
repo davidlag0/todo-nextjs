@@ -10,7 +10,7 @@ jest.mock("next-auth/react", () => ({
 
 describe("Header (unauthenticated)", () => {
   beforeEach(() => {
-    fetch.resetMocks();
+    fetch.doMock();
   });
 
   test("renders a login button in nav", async () => {
