@@ -82,6 +82,12 @@ Initialize database with Prisma
 $ npx prisma db push
 ```
 
+Troubleshooting the database (from host)
+
+```sh
+$ psql -h localhost -p 15432 -U testuser -d testdb
+```
+
 ### Deployment
 
 - Environment variables to configure:
