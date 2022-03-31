@@ -88,6 +88,15 @@ Troubleshooting the database (from host)
 $ psql -h localhost -p 15432 -U testuser -d testdb
 ```
 
+### Build on different versions of Node.js locally (example)
+
+```sh
+$ nvm ls
+$ nvm use v16.14.2
+$ npm ci
+$ npm run build --if-present
+```
+
 ### Deployment
 
 - Environment variables to configure:
