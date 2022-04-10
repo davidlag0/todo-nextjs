@@ -19,7 +19,7 @@
     "database:reset": "cat ./postgresql/drop-tables.sql | podman exec -i postgres psql -U testuser -d testdb && npx prisma db push"
   },
   "dependencies": {
-    "@prisma/client": "^3.8.0",
+    "@prisma/client": "^3.12.0",
     "mobx": "^6.3.13",
     "net": "^1.0.2",
     "next": "^12.0.8",
@@ -35,22 +35,22 @@
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
-    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/user-event": "^14.0.4",
     "cypress": "^9.3.1",
-    "eslint": "^8.6.0",
+    "eslint": "^8.13.0",
     "eslint-config-next": "^12.0.8",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-testing-library": "^5.0.3",
+    "eslint-plugin-testing-library": "^5.2.1",
     "husky": "^7.0.4",
     "jest": "^27.4.7",
     "jest-fetch-mock": "^3.0.3",
-    "jest-mock-extended": "^2.0.4",
+    "jest-mock-extended": "^2.0.5",
     "jest-openapi": "^0.14.2",
     "node-mocks-http": "^1.11.0",
-    "prettier": "^2.6.0",
-    "prisma": "^3.8.0",
+    "prettier": "^2.6.2",
+    "prisma": "^3.12.0",
     "start-server-and-test": "^1.14.0"
   },
   "commitlint": {
