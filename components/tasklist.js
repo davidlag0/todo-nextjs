@@ -85,7 +85,7 @@ export default function TaskList() {
         }
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error when adding a task:", error);
     }
   };
 
