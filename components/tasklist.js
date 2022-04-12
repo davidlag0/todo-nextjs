@@ -10,11 +10,9 @@ export default function TaskList() {
   async function getTasks() {
     try {
       const res = await fetch("api/tasks");
-      console.log("response:", res);
 
       if (res.ok) {
         const data = await res.json();
-        console.log("data:", data);
 
         updateTasks(
           data.map((task) => {
