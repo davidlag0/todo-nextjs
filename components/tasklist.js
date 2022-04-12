@@ -7,24 +7,33 @@ export default function TaskList() {
   const [tasks, updateTasks] = React.useState([]);
   const { status } = useSession();
 
+  async function getTasks() {
+    try {
+      const res = await fetch("api/tasks");
+      console.log("response:", res);
+
+      if (res.ok) {
+        const data = await res.json();
+        console.log("data:", data);
+
+        updateTasks(
+          data.map((task) => {
+            return {
+              text: task.name,
+              checked: task.checked,
+              id: task.id,
+            };
+          })
+        );
+      }
+    } catch (e) {
+      console.log("Error when fetching list of tasks:", e);
+    }
+  }
+
   React.useEffect(() => {
     if (status === "authenticated") {
-      fetch("api/tasks")
-        .then((res) => res.json())
-        .then((data) => {
-          updateTasks(
-            data.map((task) => {
-              return {
-                text: task.name,
-                checked: task.checked,
-                id: task.id,
-              };
-            })
-          );
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      getTasks();
     }
   }, [status]);
 
