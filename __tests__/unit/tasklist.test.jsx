@@ -261,4 +261,80 @@ describe("<TaskList> (authenticated)", () => {
       expect(addTaskHeading).toBeInTheDocument();
     });
   });
+
+  test("error when fetching the list of tasks", async () => {
+    const mockSession = {
+      expires: "1",
+      user: { email: "test@test.com", name: "Test Name", image: "test_image" },
+    };
+
+    fetch.mockReject(new Error("fake error message"));
+
+    render(
+      <SessionProvider session={mockSession}>
+        <TaskList></TaskList>
+      </SessionProvider>
+    );
+
+    const emptyTaskListSvg = screen.getByRole("img", { name: "Task List" });
+    const addTaskHeading = screen.getByRole("heading", {
+      name: "Add your first task",
+    });
+
+    await waitFor(() => {
+      expect(emptyTaskListSvg).toBeInTheDocument();
+    });
+    await waitFor(() => {
+      expect(addTaskHeading).toBeInTheDocument();
+    });
+  });
+
+  test("error when adding a task from an empty list", async () => {
+    const mockSession = {
+      expires: "1",
+      user: { email: "test@test.com", name: "Test Name", image: "test_image" },
+    };
+
+    fetch
+      .doMockOnce(JSON.stringify({ error: "No Task Found" }), {
+        status: 404,
+      })
+      .mockReject(new Error("fake error message"));
+
+    render(
+      <SessionProvider session={mockSession}>
+        <TaskList></TaskList>
+      </SessionProvider>
+    );
+
+    const emptyTaskListSvg = screen.getByRole("img", { name: "Task List" });
+    const addTaskHeading = screen.getByRole("heading", {
+      name: "Add your first task",
+    });
+
+    await waitFor(() => {
+      expect(emptyTaskListSvg).toBeInTheDocument();
+    });
+    await waitFor(() => {
+      expect(addTaskHeading).toBeInTheDocument();
+    });
+
+    const addTaskTextbox = screen.getByRole("textbox", {
+      name: "Enter a new task",
+    });
+
+    await userEvent.type(
+      addTaskTextbox,
+      "test task (authenticated add with error)!{enter}"
+    );
+
+    const newTaskElement = screen.getByText(
+      "test task (authenticated add with error)!"
+    );
+
+    // TODO: We should probably not show the task being in the list if there was an error!
+    await waitFor(() => {
+      expect(newTaskElement).toBeInTheDocument();
+    });
+  });
 });
