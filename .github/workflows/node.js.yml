@@ -26,11 +26,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
+    - name: Install dependencies
+      run: npm ci
+    - name: Test a build
+      run: npm run build --if-present
       env:
         CORS_ALLOWED_ORIGIN: ${{secrets.CORS_ALLOWED_ORIGIN}}
-    - run: npm test
+    - name: Test for lint issues
+      run: npm run lint
+    - name: Test for prettier formatting issues
+      run: npm run prettier-check
+    - name: Run unit tests
+      run: npm test
     - uses: actions/upload-artifact@v2
       with:
         name: coverage
