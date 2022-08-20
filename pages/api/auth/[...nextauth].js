@@ -11,18 +11,14 @@ export default NextAuth({
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user, _account, _profile, _email, _credentials }) {
       const isAllowedToSignIn = await prisma.user.findUnique({
         where: {
           email: user.email,
         },
       });
 
-      if (isAllowedToSignIn !== null) {
-        return true;
-      }
-
-      return false;
+      return isAllowedToSignIn !== null;
     },
     async jwt({ token, account }) {
       if (account) {
