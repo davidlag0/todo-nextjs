@@ -1,0 +1,245 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Tasks",
+    "description": "Manage a common task list. Add tasks, mark tasks as done and remove task from the list. Data is available in JSON format.",
+    "version": "0.0.1",
+    "termsOfService": "https://todo-nextjs.davidlaganiere.com/terms",
+    "contact": {
+      "name": "Tasks API",
+      "url": "https://todo-nextjs.davidlaganiere.com/api",
+      "email": "do-not-contact@does-not-exist.com"
+    },
+    "license": {
+      "name": "CC Attribution-ShareAlike 4.0 (CC BY-SA 4.0)",
+      "url": "https://todo-nextjs.davidlaganiere.com/price"
+    }
+  },
+  "paths": {
+    "/tasks": {
+      "get": {
+        "tags": ["Tasks"],
+        "summary": "Get current shared list of tasks.",
+        "description": "Access the shared list of tasks to collaborate with other users.",
+        "operationId": "getTasks",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/name"
+          },
+          {
+            "$ref": "#/components/parameters/done"
+          },
+          {
+            "$ref": "#/components/parameters/todo"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/200"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Tasks"],
+        "summary": "Add a new task.",
+        "description": "Add a new task by submitting a task name.",
+        "operationId": "addTask",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "name": "Wash clothes"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "tags": ["Tasks"],
+        "summary": "Get a specific task.",
+        "description": "Get a task identified by a specific ID.",
+        "operationId": "getTaskById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Task ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/404"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "name": {
+        "name": "name",
+        "in": "query",
+        "description": "**Task Name**. *Example: laundry*. The API responds with a list of results that match a searching word.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "done": {
+        "name": "done",
+        "in": "query",
+        "description": "**Done Only**. Only show tasks that are marked as done.",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "todo": {
+        "name": "todo",
+        "in": "query",
+        "description": "**To Do Only**. Only show tasks that are still to be done.",
+        "schema": {
+          "type": "boolean"
+        }
+      }
+    },
+    "schemas": {
+      "200": {
+        "title": "Successful response",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Task"
+        }
+      },
+      "404": {
+        "title": "Task not found",
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message",
+            "example": "No Task Found"
+          }
+        }
+      },
+      "Task": {
+        "title": "task",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unique ID",
+            "example": 5
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation date and time",
+            "example": "2022-01-30T08:30:00.123Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last update date and time",
+            "example": "2022-01-30T08:30:00.123Z"
+          },
+          "name": {
+            "type": "string",
+            "description": "Title",
+            "example": "Wash clothes"
+          },
+          "checked": {
+            "type": "boolean",
+            "description": "True if task is marked as done, false otherwise",
+            "example": true
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "app_id": {
+        "type": "oauth2",
+        "description": "GitHub token to authorize requests.",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://example.com/api/oauth/dialog",
+            "scopes": {
+              "write:pets": "modify pets in your account",
+              "read:pets": "read your pets"
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://todo-nextjs.davidlaganiere.com/api",
+      "description": "Production server (uses live data)"
+    },
+    {
+      "url": "http://localhost:3000/api",
+      "description": "Local development"
+    }
+  ],
+  "security": [
+    {
+      "app_id": []
+    }
+  ]
+}
