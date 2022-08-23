@@ -19,6 +19,11 @@ const customJestConfig = {
     "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }],
   },
   testEnvironment: "jest-environment-jsdom",
+  moduleNameMapper: {
+    "^jose$": require.resolve("jose"),
+    "^@panva/hkdf$": require.resolve("@panva/hkdf"),
+    "^uuid$": require.resolve("uuid"),
+  },
   testPathIgnorePatterns: ["<rootDir>/cypress/"],
 };
 
