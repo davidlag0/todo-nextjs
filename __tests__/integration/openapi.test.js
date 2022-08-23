@@ -1,7 +1,7 @@
 import jestOpenAPI from "jest-openapi";
 import fetch from "node-fetch";
 
-jestOpenAPI(__dirname + "/../../public/openapi.yml");
+jestOpenAPI(__dirname + "/../../public/openapi.json");
 
 // Reference: https://github.com/openapi-library/OpenAPIValidators/issues/251
 describe("Tests to satisfy OpenAPI spec", () => {
