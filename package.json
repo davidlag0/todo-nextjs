@@ -30,7 +30,7 @@
     "redoc": "^2.0.0-rc.63",
     "styled-components": "^5.3.3",
     "tls": "^0.0.1",
-    "yaml-loader": "^0.6.0"
+    "yaml-loader": "^0.8.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
