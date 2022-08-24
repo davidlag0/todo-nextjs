@@ -16,6 +16,12 @@ export default function Home() {
           content="Simple Next.js todo web application."
         />
         <title>Next.js TODO App</title>
+        <script
+          async
+          defer
+          data-website-id="85c1ab8e-60aa-4349-87b4-50a232399476"
+          src="https://umami.davidlaganiere.com/umami.js"
+        ></script>
       </Head>
 
       <Header />
