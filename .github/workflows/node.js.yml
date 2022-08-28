@@ -13,6 +13,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    environment:
+      name: Production
 
     strategy:
       matrix:
@@ -40,6 +42,7 @@ jobs:
       uses: cypress-io/github-action@v4
       env:
         CORS_ALLOWED_ORIGIN: "*"
+        NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
       with:
         build: npm run build
         start: npm run start
