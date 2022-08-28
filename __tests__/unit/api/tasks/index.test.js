@@ -84,6 +84,45 @@ describe("/api/tasks/", () => {
     );
   });
 
+  test("returns an error message when logged in and POST'ing a new task without a body (without task name)", async () => {
+    const { req, res } = createMocks({
+      method: "POST",
+    });
+
+    getSession.mockReturnValue(testSession);
+    getToken.mockReturnValue(testToken);
+
+    await handle(req, res);
+
+    expect(res._getStatusCode()).toBe(400);
+
+    expect(res._getData()).toEqual(
+      expect.objectContaining({
+        error: "Missing 'name' value in request body",
+      })
+    );
+  });
+
+  test("returns an error message when logged in and POST'ing a new task with a body but without task name", async () => {
+    const { req, res } = createMocks({
+      method: "POST",
+      body: { "other data": "some data" },
+    });
+
+    getSession.mockReturnValue(testSession);
+    getToken.mockReturnValue(testToken);
+
+    await handle(req, res);
+
+    expect(res._getStatusCode()).toBe(400);
+
+    expect(res._getData()).toEqual(
+      expect.objectContaining({
+        error: "Missing 'name' value in request body",
+      })
+    );
+  });
+
   test("returns error message when logged in and GET'ing tasks when there is no task in the list", async () => {
     const { req, res } = createMocks({
       method: "GET",
