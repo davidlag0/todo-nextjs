@@ -41,7 +41,7 @@ module.exports = {
       }
     ]
   },
-  webpack: (config, options) => {
+  webpack: (config) => {
     config.module.rules.push({
       test: /\.ya?ml$/,
       type: 'json',
