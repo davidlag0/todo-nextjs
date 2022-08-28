@@ -30,10 +30,6 @@ jobs:
         cache: 'npm'
     - name: Install dependencies
       run: npm ci
-    #- name: Test a build
-    #  run: npm run build --if-present
-    #  env:
-    #    CORS_ALLOWED_ORIGIN: ${{secrets.CORS_ALLOWED_ORIGIN}}
     - name: Test for lint issues
       run: npm run lint
     - name: Test for prettier formatting issues
