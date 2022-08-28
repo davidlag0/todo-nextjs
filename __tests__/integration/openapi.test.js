@@ -66,6 +66,55 @@ describe("Tests to satisfy OpenAPI spec", () => {
     expect(response).toSatisfyApiSpec();
   });
 
+  it("POST /api/tasks without a body", async () => {
+    const rawResponse = await fetch(process.env.API_BASE_URL + "/api/tasks", {
+      method: "POST",
+      headers: {
+        Cookie:
+          "next-auth.session-token=" +
+          (await encodeJwt(jwtClaims, process.env.NEXTAUTH_SECRET)),
+        "Content-Type": "application/json;charset=utf-8",
+      },
+    });
+
+    const response = {
+      req: {
+        path: rawResponse.url,
+        method: "POST",
+      },
+      status: rawResponse.status,
+      body: { error: "Missing 'name' value in request body" },
+    };
+
+    expect(response.status).toEqual(400);
+    expect(response).toSatisfyApiSpec();
+  });
+
+  it("POST /api/tasks with a body but without 'name' data", async () => {
+    const rawResponse = await fetch(process.env.API_BASE_URL + "/api/tasks", {
+      method: "POST",
+      headers: {
+        Cookie:
+          "next-auth.session-token=" +
+          (await encodeJwt(jwtClaims, process.env.NEXTAUTH_SECRET)),
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({ someField: "some data" }),
+    });
+
+    const response = {
+      req: {
+        path: rawResponse.url,
+        method: "POST",
+      },
+      status: rawResponse.status,
+      body: { error: "Missing 'name' value in request body" },
+    };
+
+    expect(response.status).toEqual(400);
+    expect(response).toSatisfyApiSpec();
+  });
+
   it("GET /api/tasks with tasks", async () => {
     const rawResponse = await fetch(process.env.API_BASE_URL + "/api/tasks", {
       headers: {
