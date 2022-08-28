@@ -38,6 +38,8 @@ jobs:
       run: docker build ./postgresql --file ./postgresql/Containerfile --tag postgresdb:latest
     - name: Start the PostgreSQL container
       run: docker run -d --rm --name postgres -p 15432:5432/tcp postgresdb:latest
+    - name: Initialize database with Prisma
+      run: npx prisma db push
     - name: Run tests (unit and integration)
       uses: cypress-io/github-action@v4
       env:
