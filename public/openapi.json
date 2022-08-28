@@ -83,6 +83,16 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -207,6 +217,15 @@
             "type": "boolean",
             "description": "True if task is marked as done, false otherwise",
             "example": true
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
           }
         }
       }
