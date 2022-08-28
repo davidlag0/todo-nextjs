@@ -25,7 +25,7 @@ export default function TaskList() {
         );
       }
     } catch (e) {
-      console.log("Error when fetching list of tasks:", e);
+      console.error("Error when fetching list of tasks:", e);
     }
   }
 
