@@ -1,7 +1,17 @@
+/**
+ * @jest-environment node
+ */
+
 import jestOpenAPI from "jest-openapi";
 import fetch from "node-fetch";
+import { encodeJwt } from "../../lib/session";
 
 jestOpenAPI(__dirname + "/../../public/openapi.json");
+
+const jwtClaims = {
+  name: "Test User",
+  email: "testuser@email.com",
+};
 
 // Reference: https://github.com/openapi-library/OpenAPIValidators/issues/251
 describe("Tests to satisfy OpenAPI spec", () => {
@@ -9,7 +19,11 @@ describe("Tests to satisfy OpenAPI spec", () => {
 
   test("GET /api/tasks with empty task list", async () => {
     const rawResponse = await fetch(process.env.API_BASE_URL + "/api/tasks", {
-      headers: { Cookie: process.env.NEXTAUTH_COOKIE || "" },
+      headers: {
+        Cookie:
+          "next-auth.session-token=" +
+          (await encodeJwt(jwtClaims, process.env.NEXTAUTH_SECRET)),
+      },
     });
 
     const body = await rawResponse.json();
@@ -30,7 +44,9 @@ describe("Tests to satisfy OpenAPI spec", () => {
     const rawResponse = await fetch(process.env.API_BASE_URL + "/api/tasks", {
       method: "POST",
       headers: {
-        Cookie: process.env.NEXTAUTH_COOKIE || "",
+        Cookie:
+          "next-auth.session-token=" +
+          (await encodeJwt(jwtClaims, process.env.NEXTAUTH_SECRET)),
         "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify({ name: "test task" }),
@@ -52,7 +68,11 @@ describe("Tests to satisfy OpenAPI spec", () => {
 
   it("GET /api/tasks with tasks", async () => {
     const rawResponse = await fetch(process.env.API_BASE_URL + "/api/tasks", {
-      headers: { Cookie: process.env.NEXTAUTH_COOKIE || "" },
+      headers: {
+        Cookie:
+          "next-auth.session-token=" +
+          (await encodeJwt(jwtClaims, process.env.NEXTAUTH_SECRET)),
+      },
     });
 
     const body = await rawResponse.json();
@@ -76,7 +96,11 @@ describe("Tests to satisfy OpenAPI spec", () => {
     const rawResponse = await fetch(
       process.env.API_BASE_URL + "/api/tasks/" + task1ID,
       {
-        headers: { Cookie: process.env.NEXTAUTH_COOKIE || "" },
+        headers: {
+          Cookie:
+            "next-auth.session-token=" +
+            (await encodeJwt(jwtClaims, process.env.NEXTAUTH_SECRET)),
+        },
       }
     );
 
@@ -98,7 +122,11 @@ describe("Tests to satisfy OpenAPI spec", () => {
     const rawResponse = await fetch(
       process.env.API_BASE_URL + "/api/tasks/4294967295",
       {
-        headers: { Cookie: process.env.NEXTAUTH_COOKIE || "" },
+        headers: {
+          Cookie:
+            "next-auth.session-token=" +
+            (await encodeJwt(jwtClaims, process.env.NEXTAUTH_SECRET)),
+        },
       }
     );
 
