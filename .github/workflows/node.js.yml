@@ -38,12 +38,17 @@ jobs:
       run: npm run lint
     - name: Test for prettier formatting issues
       run: npm run prettier-check
+    - name: Build the Docker PostgreSQL image
+      run: docker build ./postgresql --file Containerfile --tag postgresdb:latest
+    - name: Start the PostgreSQL container
+      run: docker run -d --rm --name postgres -p 15432:5432/tcp postgresdb:latest
     - name: Run tests (unit and integration)
       uses: cypress-io/github-action@v4
       env:
         CORS_ALLOWED_ORIGIN: "*"
         NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
         API_BASE_URL: "http://localhost:3000"
+        DATABASE_URL: "postgresql://testuser:testpassword@localhost:15432/testdb"
       with:
         build: npm run build
         start: npm run start
