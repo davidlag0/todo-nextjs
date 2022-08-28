@@ -43,6 +43,7 @@ jobs:
       env:
         CORS_ALLOWED_ORIGIN: "*"
         NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+        API_BASE_URL: "http://localhost:3000"
       with:
         build: npm run build
         start: npm run start
