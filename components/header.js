@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/Header.module.css";
 import { useSession, signIn, signOut } from "next-auth/react";
 
-export default function Header(props) {
+export default function Header() {
   const { data: session, status } = useSession();
 
   return (
