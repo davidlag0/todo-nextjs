@@ -20,6 +20,12 @@ export default async function handle(req, res) {
     } else if (req.method === "POST") {
       const { name } = req.body;
 
+      if (!name) {
+        return res
+          .status(400)
+          .send({ error: "Missing 'name' value in request body" });
+      }
+
       const result = await prisma.task.create({
         data: {
           name: name,
