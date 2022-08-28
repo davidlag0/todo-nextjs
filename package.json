@@ -8,7 +8,7 @@
     "lint": "next lint",
     "prepare": "husky install",
     "prettier-check": "prettier --check .",
-    "test": "jest --testPathPattern='unit'",
+    "test": "jest --coverage --testPathPattern='unit' --silent",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch --testPathPattern='unit'",
     "test:e2e": "jest --testPathPattern='integration' --runInBand",
