@@ -263,6 +263,8 @@ describe("<TaskList> (authenticated)", () => {
   });
 
   test("error when fetching the list of tasks", async () => {
+    jest.spyOn(global.console, "error").mockImplementation(() => jest.fn());
+
     const mockSession = {
       expires: "1",
       user: { email: "test@test.com", name: "Test Name", image: "test_image" },
@@ -290,6 +292,8 @@ describe("<TaskList> (authenticated)", () => {
   });
 
   test("error when adding a task from an empty list", async () => {
+    jest.spyOn(global.console, "error").mockImplementation(() => jest.fn());
+
     const mockSession = {
       expires: "1",
       user: { email: "test@test.com", name: "Test Name", image: "test_image" },
