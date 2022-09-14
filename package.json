@@ -28,7 +28,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "18.2.0",
-    "redoc": "^2.0.0-rc.77",
+    "redoc": "^2.0.0",
     "styled-components": "^5.3.3",
     "tls": "^0.0.1"
   },
