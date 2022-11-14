@@ -49,7 +49,7 @@
     "jest-fetch-mock": "^3.0.3",
     "jest-mock-extended": "^3.0.1",
     "jest-openapi": "^0.14.2",
-    "node-mocks-http": "^1.11.0",
+    "node-mocks-http": "^1.12.1",
     "prettier": "^2.7.1",
     "prisma": "^4.6.1",
     "start-server-and-test": "^1.14.0"
