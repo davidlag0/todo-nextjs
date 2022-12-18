@@ -169,7 +169,7 @@ describe("Tests to satisfy OpenAPI spec", () => {
 
   it("GET /api/task/[taskId] with non-existent task ID", async () => {
     const rawResponse = await fetch(
-      process.env.API_BASE_URL + "/api/tasks/4294967295",
+      process.env.API_BASE_URL + "/api/tasks/2147483647",
       {
         headers: {
           Cookie:
