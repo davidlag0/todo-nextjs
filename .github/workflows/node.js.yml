@@ -48,9 +48,9 @@ jobs:
       uses: cypress-io/github-action@v4
       env:
         CORS_ALLOWED_ORIGIN: "*"
-        NEXTAUTH_URL: "http://localhost:3000/api/auth"
+        NEXTAUTH_URL: "http://127.0.0.1:3000/api/auth"
         NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-        API_BASE_URL: "http://localhost:3000"
+        API_BASE_URL: "http://127.0.0.1:3000"
       with:
         build: npm run build
         start: npm run start
