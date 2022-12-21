@@ -20,7 +20,7 @@
     "database:reset": "cat ./postgresql/drop-tables.sql | podman exec -i postgres psql -U testuser -d testdb && npx prisma db push"
   },
   "dependencies": {
-    "@prisma/client": "^4.7.1",
+    "@prisma/client": "^4.8.0",
     "mobx": "^6.7.0",
     "net": "^1.0.2",
     "next": "^13.0.7",
