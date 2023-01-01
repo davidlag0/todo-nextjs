@@ -25,8 +25,6 @@ export default NextAuth({
         const author = await prisma.user.findUnique({
           where: { email: token.email },
         });
-
-        token.authorID = author.id;
       }
 
       return token;

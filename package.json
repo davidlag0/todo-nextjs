@@ -17,7 +17,7 @@
     "cypress:headless": "cypress run",
     "e2e": "start-server-and-test start http://localhost:3000 cypress",
     "e2e:headless": "start-server-and-test start http://localhost:3000 'npm run database:reset && npm run cypress:headless && npm run test:e2e'",
-    "database:reset": "cat ./postgresql/drop-tables.sql | podman exec -i postgres psql -U testuser -d testdb && npx prisma db push"
+    "database:reset": "cat ./postgresql/drop-tables.sql | podman exec -i postgres psql -U testuser -d testdb && npx prisma db push && npx prisma db seed"
   },
   "dependencies": {
     "@prisma/client": "^4.8.0",
@@ -57,5 +57,8 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   }
 }
