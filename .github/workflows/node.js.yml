@@ -44,6 +44,8 @@ jobs:
       run: until </dev/tcp/localhost/15432; do sleep 1; done
     - name: Initialize database with Prisma
       run: npx prisma db push
+    - name: Seed database with Prisma
+      run: npx prisma db seed
     - name: Run tests (unit and integration)
       uses: cypress-io/github-action@v4
       env:
