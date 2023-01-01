@@ -125,7 +125,7 @@ describe("<TaskList> (authenticated)", () => {
           updatedAt: "2022-04-11T01:20:08.371Z",
           name: "test task (authenticated)",
           checked: false,
-          authorId: null,
+          authorId: 1,
         },
       ]),
       {
@@ -170,7 +170,7 @@ describe("<TaskList> (authenticated)", () => {
             updatedAt: "2022-04-11T01:20:08.371Z",
             name: "test task (authenticated add)",
             checked: false,
-            authorId: null,
+            authorId: 1,
           },
         ]),
         {
@@ -226,7 +226,7 @@ describe("<TaskList> (authenticated)", () => {
           updatedAt: "2022-04-11T01:20:08.371Z",
           name: "test task (authenticated delete already there)",
           checked: false,
-          authorId: null,
+          authorId: 1,
         },
       ]),
       {
