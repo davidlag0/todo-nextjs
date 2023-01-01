@@ -1,7 +1,6 @@
 import { createMocks } from "node-mocks-http";
 import handle from "../../../../pages/api/tasks/index";
 import { getSession } from "next-auth/react";
-import { getToken } from "next-auth/jwt";
 import { prismaMock } from "../../../../lib/prismaMockSingleton";
 
 jest.mock("next-auth/react");
@@ -14,10 +13,6 @@ const testSession = {
     image: "testimage",
   },
   expires: "1",
-};
-
-const testToken = {
-  authorID: 1,
 };
 
 const testTask = {
@@ -72,7 +67,6 @@ describe("/api/tasks/", () => {
     });
 
     getSession.mockReturnValue(testSession);
-    getToken.mockReturnValue(testToken);
 
     prismaMock.task.create.mockResolvedValue(testTask);
 
@@ -90,7 +84,6 @@ describe("/api/tasks/", () => {
     });
 
     getSession.mockReturnValue(testSession);
-    getToken.mockReturnValue(testToken);
 
     await handle(req, res);
 
@@ -110,7 +103,6 @@ describe("/api/tasks/", () => {
     });
 
     getSession.mockReturnValue(testSession);
-    getToken.mockReturnValue(testToken);
 
     await handle(req, res);
 
@@ -129,7 +121,6 @@ describe("/api/tasks/", () => {
     });
 
     getSession.mockReturnValue(testSession);
-    getToken.mockReturnValue(testToken);
 
     prismaMock.task.findMany.mockResolvedValue([]);
 
@@ -149,7 +140,6 @@ describe("/api/tasks/", () => {
     });
 
     getSession.mockReturnValue(testSession);
-    getToken.mockReturnValue(testToken);
 
     prismaMock.task.findMany.mockResolvedValue([testTask]);
 
@@ -167,7 +157,6 @@ describe("/api/tasks/", () => {
     });
 
     getSession.mockReturnValue(testSession);
-    getToken.mockReturnValue(testToken);
 
     prismaMock.task.findMany.mockResolvedValue([testTask, testTask2]);
 

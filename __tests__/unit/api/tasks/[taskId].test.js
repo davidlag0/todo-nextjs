@@ -1,7 +1,6 @@
 import { createMocks } from "node-mocks-http";
 import handle from "../../../../pages/api/tasks/[taskId]";
 import { getSession } from "next-auth/react";
-import { getToken } from "next-auth/jwt";
 import { prismaMock } from "../../../../lib/prismaMockSingleton";
 
 jest.mock("next-auth/react");
@@ -14,10 +13,6 @@ const testSession = {
     image: "testimage",
   },
   expires: "1",
-};
-
-const testToken = {
-  authorID: 1,
 };
 
 const testTaskId = 1;
@@ -78,7 +73,6 @@ describe("/api/tasks/[taskId]", () => {
     });
 
     getSession.mockReturnValue(testSession);
-    getToken.mockReturnValue(testToken);
 
     prismaMock.task.findUnique.mockResolvedValue(null);
 
@@ -101,7 +95,6 @@ describe("/api/tasks/[taskId]", () => {
     });
 
     getSession.mockReturnValue(testSession);
-    getToken.mockReturnValue(testToken);
 
     prismaMock.task.findUnique.mockResolvedValue(testTask);
 
@@ -123,7 +116,6 @@ describe("/api/tasks/[taskId]", () => {
     });
 
     getSession.mockReturnValue(testSession);
-    getToken.mockReturnValue(testToken);
 
     prismaMock.task.delete.mockResolvedValue(testTask);
 
