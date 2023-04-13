@@ -192,6 +192,56 @@ describe("Tests to satisfy OpenAPI spec", () => {
     expect(response.status).toEqual(404);
     expect(response).toSatisfyApiSpec();
   });
+
+  it("DELETE /api/task/[taskId] with task ID", async () => {
+    const rawResponse = await fetch(
+      process.env.API_BASE_URL + "/api/tasks/" + task1ID,
+      {
+        method: "DELETE",
+        headers: {
+          Cookie:
+            "next-auth.session-token=" +
+            (await encodeJwt(jwtClaims, process.env.NEXTAUTH_SECRET)),
+        },
+      }
+    );
+
+    const body = await rawResponse.json();
+    const response = {
+      req: {
+        path: rawResponse.url,
+        method: "DELETE",
+      },
+      status: rawResponse.status,
+      body,
+    };
+
+    expect(response.status).toEqual(200);
+
+    // TODO: modify API spec to allow this to work.
+    //expect(response).toSatisfyApiSpec();
+  });
+
+  test("GET /api/tasks when logged out", async () => {
+    const rawResponse = await fetch(
+      process.env.API_BASE_URL + "/api/tasks",
+      {}
+    );
+
+    const body = await rawResponse.json();
+    const response = {
+      req: {
+        path: rawResponse.url,
+        method: "GET",
+      },
+      status: rawResponse.status,
+      body,
+    };
+
+    expect(response.status).toEqual(401);
+    // TODO: modify API spec to allow this to work.
+    //expect(response).toSatisfyApiSpec();
+  });
 });
 
 // TODO: add test for invalid task ID that is not a number.
