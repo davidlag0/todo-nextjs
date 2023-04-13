@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import prisma from "../../../lib/prisma";
 
-export default NextAuth({
+export const authOptions = {
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID,
@@ -30,4 +30,6 @@ export default NextAuth({
       return token;
     },
   },
-});
+};
+
+export default NextAuth(authOptions);

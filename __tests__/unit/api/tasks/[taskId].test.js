@@ -1,10 +1,18 @@
 import { createMocks } from "node-mocks-http";
 import handle from "../../../../pages/api/tasks/[taskId]";
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
 import { prismaMock } from "../../../../lib/prismaMockSingleton";
 
-jest.mock("next-auth/react");
 jest.mock("next-auth/jwt");
+jest.mock("next-auth/next", () => {
+  const originalModule = jest.requireActual("next-auth/next");
+
+  return {
+    __esModule: true,
+    ...originalModule,
+    getServerSession: jest.fn(),
+  };
+});
 
 const testSession = {
   user: {
@@ -32,7 +40,7 @@ describe("/api/tasks/[taskId]", () => {
       },
     });
 
-    getSession.mockReturnValue(null);
+    getServerSession.mockReturnValue(null);
 
     await handle(req, res);
 
@@ -52,7 +60,7 @@ describe("/api/tasks/[taskId]", () => {
       },
     });
 
-    getSession.mockReturnValue({});
+    getServerSession.mockReturnValue({});
 
     await handle(req, res);
 
@@ -72,7 +80,7 @@ describe("/api/tasks/[taskId]", () => {
       },
     });
 
-    getSession.mockReturnValue(testSession);
+    getServerSession.mockReturnValue(testSession);
 
     prismaMock.task.findUnique.mockResolvedValue(null);
 
@@ -94,7 +102,7 @@ describe("/api/tasks/[taskId]", () => {
       },
     });
 
-    getSession.mockReturnValue(testSession);
+    getServerSession.mockReturnValue(testSession);
 
     prismaMock.task.findUnique.mockResolvedValue(testTask);
 
@@ -115,7 +123,7 @@ describe("/api/tasks/[taskId]", () => {
       },
     });
 
-    getSession.mockReturnValue(testSession);
+    getServerSession.mockReturnValue(testSession);
 
     prismaMock.task.delete.mockResolvedValue(testTask);
 
