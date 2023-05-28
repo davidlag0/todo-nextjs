@@ -8,6 +8,7 @@
     "lint": "next lint",
     "prepare": "husky install",
     "prettier-check": "prettier --check .",
+    "postinstall": "prisma generate",
     "test": "jest --coverage --testPathPattern='unit'",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch --testPathPattern='unit'",
