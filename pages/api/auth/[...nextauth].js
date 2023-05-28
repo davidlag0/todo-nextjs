@@ -20,15 +20,6 @@ export const authOptions = {
 
       return isAllowedToSignIn !== null;
     },
-    async jwt({ token, account }) {
-      if (account) {
-        const author = await prisma.user.findUnique({
-          where: { email: token.email },
-        });
-      }
-
-      return token;
-    },
   },
 };
 
