@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",
-    "mobx": "^6.9.0",
+    "mobx": "^6.9.1",
     "net": "^1.0.2",
     "next": "^13.4.9",
     "next-auth": "^4.22.1",
