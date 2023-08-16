@@ -50,7 +50,7 @@
     "jest-mock-extended": "^3.0.5",
     "jest-openapi": "^0.14.2",
     "node-mocks-http": "^1.13.0",
-    "prettier": "^3.0.1",
+    "prettier": "^3.0.2",
     "prisma": "^5.1.1",
     "start-server-and-test": "^2.0.0"
   },
