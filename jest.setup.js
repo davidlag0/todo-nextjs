@@ -3,7 +3,7 @@
 
 // Used for __tests__/testing-library.js
 // Learn more: https://github.com/testing-library/jest-dom
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 
 // Required to fix an error message. Reference used for the fix:
 // https://github.com/inrupt/solid-client-authn-js/issues/1676
