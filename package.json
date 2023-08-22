@@ -16,8 +16,8 @@
     "test:dependencies": "npm run build && npm run lint && npm run prettier-check && npm run test && npm run e2e:headless",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
-    "e2e": "start-server-and-test start http://localhost:3000 cypress",
-    "e2e:headless": "start-server-and-test start http://localhost:3000 'npm run database:reset && npm run cypress:headless && npm run test:e2e'",
+    "e2e": "start-server-and-test start http://127.0.0.1:3000 cypress",
+    "e2e:headless": "start-server-and-test start http://127.0.0.1:3000 'npm run database:reset && npm run cypress:headless && npm run test:e2e'",
     "database:reset": "cat ./postgresql/drop-tables.sql | podman exec -i postgres psql -U testuser -d testdb && npx prisma db push && npx prisma db seed"
   },
   "dependencies": {

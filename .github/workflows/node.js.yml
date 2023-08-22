@@ -16,7 +16,7 @@ jobs:
     environment:
       name: Production
     env:
-      DATABASE_URL: "postgresql://testuser:testpassword@localhost:15432/testdb"
+      DATABASE_URL: "postgresql://testuser:testpassword@127.0.0.1:15432/testdb"
 
     strategy:
       matrix:
@@ -41,7 +41,7 @@ jobs:
     - name: Start the PostgreSQL container
       run: docker run -d --rm --name postgres -p 15432:5432/tcp postgresdb:latest
     - name: Wait until PostgreSQL container is available
-      run: until </dev/tcp/localhost/15432; do sleep 1; done
+      run: until </dev/tcp/127.0.0.1/15432; do sleep 1; done
     - name: Initialize database with Prisma
       run: npx prisma db push
     - name: Seed database with Prisma

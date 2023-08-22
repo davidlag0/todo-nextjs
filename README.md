@@ -48,7 +48,7 @@ npm start
 $ npm run dev
 ```
 
-The application is accessible at [http://localhost:3000](http://localhost:3000).
+The application is accessible at [http://127.0.0.1:3000](http://127.0.0.1:3000).
 
 ### Linting
 
@@ -85,7 +85,7 @@ $ npx prisma db push
 Troubleshooting the database (from host)
 
 ```sh
-$ psql -h localhost -p 15432 -U testuser -d testdb
+$ psql -h 127.0.0.1 -p 15432 -U testuser -d testdb
 ```
 
 ### Build on different versions of Node.js locally (example)
