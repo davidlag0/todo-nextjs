@@ -12,39 +12,39 @@ This application is meant to be some kind of boilerplate for me to learn about t
 
 ### Install nvm (https://github.com/nvm-sh/nvm/blob/master/README.md)
 
-```sh
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+```console
+$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 ```
 
 ### Install node
 
-```sh
-nvm install v16.12.0
+```console
+$ nvm install v16.12.0
 ```
 
 ### Install npm modules
 
-```sh
-npm install --production
+```console
+$ npm install --production
 ```
 
 ### Build
 
-```sh
-npm run build
+```console
+$ npm run build
 ```
 
 ### Run the built application in production mode
 
-```sh
-npm start
+```console
+$ npm start
 ```
 
 ## Development
 
 ### Start development server:
 
-```sh
+```console
 $ npm run dev
 ```
 
@@ -52,7 +52,7 @@ The application is accessible at [http://127.0.0.1:3000](http://127.0.0.1:3000).
 
 ### Linting
 
-```sh
+```console
 $ npm run lint
 ```
 
@@ -60,37 +60,37 @@ $ npm run lint
 
 Start podman VM:
 
-```sh
+```console
 $ podman machine start
 ```
 
 Build container image using the `Containerfile` in folder `postgresql`:
 
-```sh
+```console
 $ podman build -t postgresdb:latest .
 ```
 
 Run test PostgreSQL database container:
 
-```sh
+```console
 $ podman run -d --rm --name postgres -p 15432:5432/tcp postgresdb:latest
 ```
 
 Initialize database with Prisma
 
-```sh
+```console
 $ npx prisma db push
 ```
 
 Troubleshooting the database (from host)
 
-```sh
+```console
 $ psql -h 127.0.0.1 -p 15432 -U testuser -d testdb
 ```
 
 ### Build on different versions of Node.js locally (example)
 
-```sh
+```console
 $ nvm ls
 $ nvm use v16.14.2
 $ npm ci
