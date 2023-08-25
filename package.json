@@ -45,7 +45,7 @@
     "eslint-plugin-testing-library": "^6.0.1",
     "husky": "^8.0.3",
     "jest": "^29.6.3",
-    "jest-environment-jsdom": "^29.6.3",
+    "jest-environment-jsdom": "^29.6.4",
     "jest-fetch-mock": "^3.0.3",
     "jest-mock-extended": "^3.0.5",
     "jest-openapi": "^0.14.2",
