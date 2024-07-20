@@ -61,18 +61,3 @@ jobs:
       with:
         name: coverage-${{ matrix.node-version }}
         path: coverage
-
-  codecov:
-    name: Codecov
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-    needs:
-      - build
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/download-artifact@v4
-      with:
-        name: coverage-${{ matrix.node-version }}
-    - uses: codecov/codecov-action@v4
