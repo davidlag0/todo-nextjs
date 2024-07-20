@@ -24,9 +24,9 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
@@ -47,7 +47,7 @@ jobs:
     - name: Seed database with Prisma
       run: npx prisma db seed
     - name: Run tests (unit and integration)
-      uses: cypress-io/github-action@v4
+      uses: cypress-io/github-action@v6
       env:
         CORS_ALLOWED_ORIGIN: "*"
         NEXTAUTH_URL: "http://127.0.0.1:3000/api/auth"
@@ -57,7 +57,7 @@ jobs:
         build: npm run build
         start: npm run start
         command: npm run test:coverage
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: coverage
         path: coverage
@@ -68,8 +68,8 @@ jobs:
     needs:
       - build
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/download-artifact@v3
+    - uses: actions/checkout@v4
+    - uses: actions/download-artifact@v4
       with:
         name: coverage
-    - uses: codecov/codecov-action@v3
+    - uses: codecov/codecov-action@v4
