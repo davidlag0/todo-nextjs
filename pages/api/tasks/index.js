@@ -14,7 +14,7 @@ export default async function handle(req, res) {
       if (tasks.length !== 0) {
         res.json(tasks);
       } else {
-        res.status(404).send({ error: "No Task Found" });
+        res.status(404).json({ error: "No Task Found" });
       }
     } else if (req.method === "POST") {
       const { name } = req.body;

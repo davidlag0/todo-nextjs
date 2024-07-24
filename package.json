@@ -13,6 +13,7 @@
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch --testPathPattern='unit'",
     "test:e2e": "jest --testPathPattern='integration' --runInBand",
+    "test:e2e2": "jest --testPathPattern='integration.openapi2' --runInBand",
     "test:dependencies": "npm run build && npm run lint && npm run prettier-check && npm run test && npm run e2e:headless",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
@@ -50,6 +51,7 @@
     "jest-mock-extended": "^3.0.7",
     "jest-openapi": "^0.14.2",
     "node-mocks-http": "^1.15.0",
+    "openapi-backend": "^5.10.6",
     "prettier": "^3.3.3",
     "prisma": "^5.17.0",
     "start-server-and-test": "^2.0.4"
