@@ -135,7 +135,7 @@ describe("/api/tasks/", () => {
     await handle(req, res);
 
     expect(res._getStatusCode()).toBe(404);
-    expect(res._getData()).toEqual(
+    expect(JSON.parse(res._getData())).toEqual(
       expect.objectContaining({
         error: "No Task Found",
       })

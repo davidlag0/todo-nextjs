@@ -37,7 +37,7 @@
           "200": {
             "description": "Successful response",
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/200"
                 }
@@ -47,7 +47,7 @@
           "404": {
             "description": "Not found response",
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/404"
                 }
