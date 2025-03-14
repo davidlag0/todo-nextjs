@@ -52,7 +52,7 @@
     "node-mocks-http": "^1.16.2",
     "prettier": "^3.5.3",
     "prisma": "^6.5.0",
-    "start-server-and-test": "^2.0.10"
+    "start-server-and-test": "^2.0.11"
   },
   "commitlint": {
     "extends": [
