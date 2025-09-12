@@ -52,7 +52,7 @@
     "jest-openapi": "^0.14.2",
     "node-mocks-http": "^1.17.2",
     "prettier": "^3.6.2",
-    "prisma": "^6.16.0",
+    "prisma": "^6.16.1",
     "start-server-and-test": "^2.1.0"
   },
   "commitlint": {
