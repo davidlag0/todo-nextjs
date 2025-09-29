@@ -23,7 +23,7 @@
   "dependencies": {
     "@prisma/client": "^6.16.2",
     "dotenv": "^17.2.2",
-    "mobx": "^6.13.7",
+    "mobx": "^6.15.0",
     "net": "^1.0.2",
     "next": "^15.5.4",
     "next-auth": "^4.24.11",
