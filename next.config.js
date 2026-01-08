@@ -30,8 +30,8 @@ const securityHeaders = [
 ]
 
 module.exports = {
-  swcMinify: true,
   reactStrictMode: true,
+  turbopack: {},
   async headers() {
     return [
       {
