@@ -29,7 +29,7 @@ const securityHeaders = [
   }
 ]
 
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
   turbopack: {},
   async headers() {
@@ -51,3 +51,5 @@ module.exports = {
     return config
   }
 }
+
+export default nextConfig;
