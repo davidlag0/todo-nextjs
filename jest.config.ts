@@ -11,15 +11,18 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 const customJestConfig = {
   setupFilesAfterEnv: [
-    "<rootDir>/jest.setup.js",
-    "<rootDir>/lib/prismaMockSingleton.js",
+    "<rootDir>/jest.setup.ts",
+    "<rootDir>/lib/prismaMockSingleton.ts",
   ],
   // if using TypeScript with a baseUrl set to the root directory then you need the below for alias' to work
   moduleDirectories: ["node_modules", "<rootDir>/"],
   transform: {
     // Use babel-jest to transpile tests with the next/babel preset
     // https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object
-    "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }],
+    "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }] as [
+      string,
+      any,
+    ],
   },
   testEnvironment: "jest-environment-jsdom",
   moduleNameMapper: {

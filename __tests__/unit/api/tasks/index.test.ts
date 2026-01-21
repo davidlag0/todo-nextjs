@@ -14,7 +14,25 @@ jest.mock("next-auth/next", () => {
   };
 });
 
-const testSession = {
+const mockedGetServerSession = getServerSession as jest.MockedFunction<
+  typeof getServerSession
+>;
+
+interface TestSession {
+  user: {
+    name: string;
+    email: string;
+    image: string;
+  };
+  expires: string;
+}
+
+interface TestTask {
+  name: string;
+  checked: boolean;
+}
+
+const testSession: TestSession = {
   user: {
     name: "Test Author",
     email: "testauthor@test.com",
@@ -23,12 +41,12 @@ const testSession = {
   expires: "1",
 };
 
-const testTask = {
+const testTask: TestTask = {
   name: "Test Task",
   checked: false,
 };
 
-const testTask2 = {
+const testTask2: TestTask = {
   name: "Test Task 2",
   checked: false,
 };
@@ -39,7 +57,7 @@ describe("/api/tasks/", () => {
       method: "GET",
     });
 
-    getServerSession.mockReturnValue(null);
+    mockedGetServerSession.mockResolvedValue(null);
 
     await handle(req, res);
 
@@ -53,10 +71,10 @@ describe("/api/tasks/", () => {
 
   test("returns error message when logged in and using an unsupported HTTP method", async () => {
     const { req, res } = createMocks({
-      method: "UNSUPPORTED",
+      method: "PATCH",
     });
 
-    getServerSession.mockReturnValue(testSession);
+    mockedGetServerSession.mockResolvedValue(testSession);
 
     await handle(req, res);
 
@@ -74,7 +92,7 @@ describe("/api/tasks/", () => {
       body: { name: "Test Task" },
     });
 
-    getServerSession.mockReturnValue(testSession);
+    mockedGetServerSession.mockResolvedValue(testSession);
 
     prismaMock.task.create.mockResolvedValue(testTask);
 
@@ -91,7 +109,7 @@ describe("/api/tasks/", () => {
       method: "POST",
     });
 
-    getServerSession.mockReturnValue(testSession);
+    mockedGetServerSession.mockResolvedValue(testSession);
 
     await handle(req, res);
 
@@ -110,7 +128,7 @@ describe("/api/tasks/", () => {
       body: { "other data": "some data" },
     });
 
-    getServerSession.mockReturnValue(testSession);
+    mockedGetServerSession.mockResolvedValue(testSession);
 
     await handle(req, res);
 
@@ -128,7 +146,7 @@ describe("/api/tasks/", () => {
       method: "GET",
     });
 
-    getServerSession.mockReturnValue(testSession);
+    mockedGetServerSession.mockResolvedValue(testSession);
 
     prismaMock.task.findMany.mockResolvedValue([]);
 
@@ -147,7 +165,7 @@ describe("/api/tasks/", () => {
       method: "GET",
     });
 
-    getServerSession.mockReturnValue(testSession);
+    mockedGetServerSession.mockResolvedValue(testSession);
 
     prismaMock.task.findMany.mockResolvedValue([testTask]);
 
@@ -164,7 +182,7 @@ describe("/api/tasks/", () => {
       method: "GET",
     });
 
-    getServerSession.mockReturnValue(testSession);
+    mockedGetServerSession.mockResolvedValue(testSession);
 
     prismaMock.task.findMany.mockResolvedValue([testTask, testTask2]);
 

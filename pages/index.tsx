@@ -2,8 +2,9 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Header from "../components/header";
 import TaskList from "../components/tasklist";
+import type { NextPage } from "next";
 
-export default function Home() {
+const Home: NextPage = () => {
   return (
     <div>
       <Head>
@@ -33,4 +34,6 @@ export default function Home() {
       </main>
     </div>
   );
-}
+};
+
+export default Home;

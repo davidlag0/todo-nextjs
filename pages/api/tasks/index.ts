@@ -1,13 +1,17 @@
 import { authOptions } from "../auth/[...nextauth]";
 import prisma from "../../../lib/prisma";
 import { getServerSession } from "next-auth/next";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
-export default async function handle(req, res) {
+export default async function handle(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const session = await getServerSession(req, res, authOptions);
 
-  if (session) {
+  if (session && session.user && session.user.email) {
     if (req.method === "GET") {
       const tasks = await prisma.task.findMany();
 
@@ -28,7 +32,7 @@ export default async function handle(req, res) {
       const result = await prisma.task.create({
         data: {
           name: name,
-          author: { connect: { email: session?.user?.email } },
+          author: { connect: { email: session.user.email } },
         },
       });
 

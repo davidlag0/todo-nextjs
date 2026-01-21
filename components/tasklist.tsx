@@ -3,8 +3,14 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import styles from "../styles/TaskList.module.css";
 
+interface Task {
+  text: string;
+  checked: boolean;
+  id: number;
+}
+
 export default function TaskList() {
-  const [tasks, updateTasks] = React.useState([]);
+  const [tasks, updateTasks] = React.useState<Task[]>([]);
   const { status } = useSession();
 
   async function getTasks() {
@@ -15,7 +21,7 @@ export default function TaskList() {
         const data = await res.json();
 
         updateTasks(
-          data.map((task) => {
+          data.map((task: any) => {
             return {
               text: task.name,
               checked: task.checked,
@@ -35,7 +41,7 @@ export default function TaskList() {
     }
   }, [status]);
 
-  const addTask = (text) => {
+  const addTask = (text: string) => {
     const newTask = {
       text,
       checked: false,
@@ -47,8 +53,8 @@ export default function TaskList() {
     });
   };
 
-  const handleDeleteTask = async (event) => {
-    const IDToDelete = event.target.dataset.deleteid;
+  const handleDeleteTask = async (id: string) => {
+    const IDToDelete = id;
 
     updateTasks((prevTasks) => {
       return prevTasks.filter((task) => task.id !== Number(IDToDelete));
@@ -62,12 +68,12 @@ export default function TaskList() {
     }
   };
 
-  const handleAddTask = async (event) => {
+  const handleAddTask = async (event: React.FormEvent<HTMLFormElement>) => {
     // To avoid the default form behavior of sending the content to the web server.
     event.preventDefault();
 
     try {
-      const input = document.querySelector("form > input");
+      const input = document.querySelector("form > input") as HTMLInputElement;
 
       const text = input.value.trim();
       if (text !== "") {
@@ -128,7 +134,8 @@ export default function TaskList() {
               <TaskItem
                 key={task.id}
                 text={task.text}
-                id={task.id}
+                checked={task.checked}
+                id={task.id.toString()}
                 handleDelete={handleDeleteTask}
               ></TaskItem>
             );
