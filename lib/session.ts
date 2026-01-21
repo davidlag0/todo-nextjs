@@ -4,12 +4,15 @@ import { EncryptJWT } from "jose";
 import { v4 as uuid } from "uuid";
 
 // Function logic derived from https://github.com/nextauthjs/next-auth/blob/5c1826a8d1f8d8c2d26959d12375704b0a693bfc/packages/next-auth/src/jwt/index.ts#L113-L121
-async function getDerivedEncryptionKey(secret) {
+async function getDerivedEncryptionKey(secret: string): Promise<Uint8Array> {
   return hkdf("sha256", secret, "", "NextAuth.js Generated Encryption Key", 32);
 }
 
 // Function logic derived from https://github.com/nextauthjs/next-auth/blob/5c1826a8d1f8d8c2d26959d12375704b0a693bfc/packages/next-auth/src/jwt/index.ts#L16-L25
-export async function encodeJwt(claims, secret) {
+export async function encodeJwt(
+  claims: Record<string, any>,
+  secret: string
+): Promise<string> {
   const maxAge = 30 * 24 * 60 * 60; // 30 days
   const encryptionSecret = await getDerivedEncryptionKey(secret);
 

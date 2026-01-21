@@ -1,10 +1,22 @@
 import React from "react";
 import styles from "../styles/TaskItem.module.css";
 
-export default function TaskItem({ text, checked, id, handleDelete }) {
+interface TaskItemProps {
+  text: string;
+  checked: boolean;
+  id: string;
+  handleDelete: (id: string) => void;
+}
+
+export default function TaskItem({
+  text,
+  checked,
+  id,
+  handleDelete,
+}: TaskItemProps) {
   const [done, setDone] = React.useState(checked);
 
-  const handleSetDone = (event) => {
+  const handleSetDone = (event: React.MouseEvent<HTMLInputElement>) => {
     setDone(!done);
   };
 
@@ -19,9 +31,9 @@ export default function TaskItem({ text, checked, id, handleDelete }) {
         />
         <label htmlFor={id} className={styles.listTaskLabel}>
           <svg className={styles.svg}>
+            <title>Task Checkmark</title>
             <rect width="18" height="18" x="3" y="3" />
             <path
-              title="Task Checkmark"
               className={
                 done
                   ? styles.listTaskCheckmarkChecked
@@ -42,7 +54,7 @@ export default function TaskItem({ text, checked, id, handleDelete }) {
         <button
           className={styles.listTaskButton}
           data-deleteid={id}
-          onClick={handleDelete}
+          onClick={() => handleDelete(id)}
         >
           <svg className={styles.listTaskButtonSVG}>
             <path d="M15.5355339 15.5355339L8.46446609 8.46446609M15.5355339 8.46446609L8.46446609 15.5355339" />

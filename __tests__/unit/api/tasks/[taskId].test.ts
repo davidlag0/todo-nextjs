@@ -14,7 +14,26 @@ jest.mock("next-auth/next", () => {
   };
 });
 
-const testSession = {
+const mockedGetServerSession = getServerSession as jest.MockedFunction<
+  typeof getServerSession
+>;
+
+interface TestSession {
+  user: {
+    name: string;
+    email: string;
+    image: string;
+  };
+  expires: string;
+}
+
+interface TestTask {
+  id: number;
+  name: string;
+  checked: boolean;
+}
+
+const testSession: TestSession = {
   user: {
     name: "Test Author",
     email: "testauthor@test.com",
@@ -24,7 +43,7 @@ const testSession = {
 };
 
 const testTaskId = 1;
-const testTask = {
+const testTask: TestTask = {
   id: testTaskId,
   name: "Test Task",
   checked: false,
@@ -40,7 +59,7 @@ describe("/api/tasks/[taskId]", () => {
       },
     });
 
-    getServerSession.mockReturnValue(null);
+    mockedGetServerSession.mockResolvedValue(null);
 
     await handle(req, res);
 
@@ -54,13 +73,13 @@ describe("/api/tasks/[taskId]", () => {
 
   test("returns error message when logged in and using an unsupported HTTP method", async () => {
     const { req, res } = createMocks({
-      method: "UNSUPPORTED",
+      method: "PATCH",
       query: {
         id: testTaskUrlId,
       },
     });
 
-    getServerSession.mockReturnValue({});
+    mockedGetServerSession.mockResolvedValue(testSession);
 
     await handle(req, res);
 
@@ -80,7 +99,7 @@ describe("/api/tasks/[taskId]", () => {
       },
     });
 
-    getServerSession.mockReturnValue(testSession);
+    mockedGetServerSession.mockResolvedValue(testSession);
 
     prismaMock.task.findUnique.mockResolvedValue(null);
 
@@ -102,7 +121,7 @@ describe("/api/tasks/[taskId]", () => {
       },
     });
 
-    getServerSession.mockReturnValue(testSession);
+    mockedGetServerSession.mockResolvedValue(testSession);
 
     prismaMock.task.findUnique.mockResolvedValue(testTask);
 
@@ -123,7 +142,7 @@ describe("/api/tasks/[taskId]", () => {
       },
     });
 
-    getServerSession.mockReturnValue(testSession);
+    mockedGetServerSession.mockResolvedValue(testSession);
 
     prismaMock.task.delete.mockResolvedValue(testTask);
 
