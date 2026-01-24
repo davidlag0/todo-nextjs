@@ -1,7 +1,4 @@
-import nextJest from "next/jest.js";
-import { createRequire } from "node:module";
-
-const require = createRequire(import.meta.url);
+const nextJest = require("next/jest.js");
 
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
@@ -19,10 +16,7 @@ const customJestConfig = {
   transform: {
     // Use babel-jest to transpile tests with the next/babel preset
     // https://jestjs.io/docs/configuration#transform-objectstring-pathtotransformer--pathtotransformer-object
-    "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }] as [
-      string,
-      any,
-    ],
+    "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }],
   },
   testEnvironment: "jest-environment-jsdom",
   moduleNameMapper: {
@@ -36,4 +30,4 @@ const customJestConfig = {
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-export default createJestConfig(customJestConfig);
+module.exports = createJestConfig(customJestConfig);
