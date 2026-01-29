@@ -32,7 +32,7 @@
     "pg": "^8.17.2",
     "react": "^19.0.0",
     "react-dom": "^19.2.4",
-    "react-is": "19.2.3",
+    "react-is": "19.2.4",
     "styled-components": "^6.3.8",
     "tls": "^0.0.1"
   },
