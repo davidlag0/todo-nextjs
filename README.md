@@ -88,6 +88,12 @@ Troubleshooting the database (from host)
 $ psql -h 127.0.0.1 -p 15432 -U testuser -d testdb
 ```
 
+To enable logging in with a GitHub account, the user needs to be added first in the database with an INSERT statement like this:
+
+```sql
+INSERT INTO users (updated_at,email,name,role) VALUES (NOW(),'<valid email with GitHub account>','<your name>','ADMIN');
+```
+
 ### Build on different versions of Node.js locally (example)
 
 ```console
