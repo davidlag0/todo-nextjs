@@ -33,7 +33,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.2.4",
     "react-is": "19.2.4",
-    "styled-components": "^6.3.10",
+    "styled-components": "^6.3.11",
     "tls": "^0.0.1"
   },
   "devDependencies": {
