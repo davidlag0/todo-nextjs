@@ -45,7 +45,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^25.5.0",
     "@types/node-fetch": "^2.6.13",
-    "@types/pg": "^8.18.0",
+    "@types/pg": "^8.20.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/uuid": "10.0.0",
