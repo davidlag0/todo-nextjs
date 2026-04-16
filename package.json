@@ -51,7 +51,7 @@
     "@types/uuid": "10.0.0",
     "cypress": "^15.13.1",
     "eslint": "^9.39.2",
-    "eslint-config-next": "^16.2.3",
+    "eslint-config-next": "^16.2.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-testing-library": "^7.16.2",
     "husky": "^9.1.7",
